@@ -4,19 +4,27 @@ A desktop practice app written in **Python and PyQt5**.
 <img src="docs/images/sight-reading.png" alt="Sight reading mode" width="800">
 ## Run
 
-Use your existing Python environment containing PyQt5:
+Python 3.10 or later is required. Run the commands below from the project folder. If PyQt5 is already installed in your Python environment, skip the installation command.
 
-```powershell
-python main.py
-```
-
-On this Windows machine, double-click **Start Rhythm Studio.bat** to use your existing Python 3.10 installation automatically.
-
-Python 3.10 or later is required. If setting up a new environment, the only external dependency is listed in `requirements.txt`:
+### Windows
 
 ```powershell
 python -m pip install -r requirements.txt
+python main.py
 ```
+
+Alternatively, double-click **Start Rhythm Studio.bat**. The launcher uses Python 3.10 from its standard per-user installation location if available, otherwise the Windows Python launcher (`py`).
+
+### macOS
+
+Open Terminal in the project folder and run:
+
+```bash
+python3 -m pip install -r requirements.txt
+python3 main.py
+```
+
+The `.bat` launcher is Windows-only; use the Terminal commands on macOS. The app uses cross-platform PyQt5 code, but has only been tested on Windows so far.
 
 ## Practice
 
