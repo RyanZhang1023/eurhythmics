@@ -141,8 +141,11 @@ class ScoreWidget(QWidget):
         self.relayout()
 
     def bar_width(self, bar):
-        count = sum(n.bar == bar for n in self.exercise.notes)
-        return max(165, count * 27 + 35)
+        # Size every bar for the densest one, including bars on incomplete rows.
+        counts = [0] * self.exercise.bars
+        for note in self.exercise.notes:
+            counts[note.bar] += 1
+        return max(165, max(counts) * 27 + 35)
 
     def systems(self):
         if not self.exercise:
@@ -205,8 +208,7 @@ class ScoreWidget(QWidget):
             signature_width = abs(ex.key.signature) * 9 if ex.key else 0
             start_x = 105 + signature_width
             total = sum(self.bar_width(b) for b in bars)
-            extra = max(0, self.width() - 30 - start_x - total) / len(bars)
-            right_edge = start_x + total + extra * len(bars)
+            right_edge = start_x + total
             row_edges[row] = (start_x - 12, right_edge, top)
             p.setPen(QPen(QColor("#8b999e"), .8))
             for line in range(5):
@@ -228,7 +230,7 @@ class ScoreWidget(QWidget):
                 p.drawText(QRectF(start_x - 35, yy, 30, 26), Qt.AlignCenter, text)
             x = start_x
             for bar in bars:
-                width = self.bar_width(bar) + extra
+                width = self.bar_width(bar)
                 p.setPen(QColor("#6b7c83"))
                 p.setFont(QFont("Segoe UI", 9))
                 p.drawText(QPointF(x, top - 45), str(bar + 1))

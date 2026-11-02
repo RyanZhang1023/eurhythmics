@@ -1,7 +1,7 @@
 # Eurhythmics Rhythm Studio
 
 A desktop practice app written in **Python and PyQt5**.
-
+<img src="docs/images/sight-reading.png" alt="Sight reading mode" width="800">
 ## Run
 
 Use your existing Python environment containing PyQt5:
